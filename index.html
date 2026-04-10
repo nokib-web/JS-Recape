@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="NovaSaaS — The next-generation platform to scale your business with AI-powered automation, real-time analytics, and seamless team collaboration." />
+  <meta name="keywords" content="SaaS, AI automation, analytics, collaboration, productivity" />
+  <meta name="author" content="NovaSaaS" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NovaSaaS — Scale Without Limits" />
+  <meta property="og:description" content="AI-powered automation and analytics for modern teams." />
+  <meta property="og:type" content="website" />
+
+  <title>NovaSaaS — Scale Without Limits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Ambient Background Blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <!-- ================================
+         NAVBAR
+    ================================ -->
+  <header id="navbar" role="banner">
+    <nav class="nav-container" aria-label="Main navigation">
+      <a href="#hero" class="nav-logo" aria-label="NovaSaaS Home">
+        <span class="logo-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#60a5fa" />
+              </linearGradient>
+            </defs>
+            <polygon points="16,2 30,28 2,28" fill="url(#logoGrad)" />
+            <polygon points="16,10 24,26 8,26" fill="#0a0a0f" opacity="0.6" />
+          </svg>
+        </span>
+        <span class="logo-text">Nova<span class="logo-accent">SaaS</span></span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+        <li><a href="#footer" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#pricing" class="btn btn-ghost">Sign In</a>
+        <a href="#pricing" class="btn btn-primary">
+          Get Started
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Hamburger button — visible only on mobile -->
+      <button
+        class="hamburger"
+        id="hamburger-btn"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile slide-down menu -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <nav aria-label="Mobile navigation links">
+        <ul class="mobile-nav-links" role="list">
+          <li><a href="#features" class="mobile-nav-link">Features</a></li>
+          <li><a href="#pricing"  class="mobile-nav-link">Pricing</a></li>
+          <li><a href="#testimonials" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="#footer"   class="mobile-nav-link">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-actions">
+          <a href="#pricing" class="btn btn-outline" id="mobile-signin">Sign In</a>
+          <a href="#pricing" class="btn btn-primary" id="mobile-cta">Get Started →</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================================
+           HERO SECTION
+      ================================ -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-container">
+        <!-- Badge -->
+        <div class="hero-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          <span>Trusted by 50,000+ teams worldwide</span>
+        </div>
+
+        <h1 id="hero-title" class="hero-title">
+          Scale Your Business
+          <span class="typewriter-line">
+            <span
+              id="typewriter-target"
+              class="gradient-text"
+              aria-live="polite"
+              aria-label="Rotating tagline"
+            ></span><span
+              class="typewriter-cursor"
+              aria-hidden="true"
+            ></span>
+          </span>
+        </h1>
+
+        <div class="hero-badge reveal">
+          <span class="badge-text" id="hero-avg-rating">4.9★</span>
+          <span class="badge-label">Avg. Rating</span>
+        </div>
+        <p class="hero-subtitle reveal--stagger-1">
+          The AI-powered SaaS platform that unifies your workflows, amplifies
+          your analytics, and accelerates your team's output — all from a
+          single, beautiful dashboard.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#pricing" class="btn btn-primary btn-lg" id="hero-cta-primary">
+            Start Free Trial
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#features" class="btn btn-outline btn-lg" id="hero-cta-secondary">
+            <span class="play-icon" aria-hidden="true">▶</span>
+            Watch Demo
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">50K+</span>
+            <span class="stat-label">Active Teams</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-value">99.9%</span>
+            <span class="stat-label">Uptime SLA</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-value">3.2B+</span>
+            <span class="stat-label">Events Processed</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-value" id="hero-avg-rating">4.9★</span>
+            <span class="stat-label">Avg. Rating</span>
+          </div>
+        </div>
+
+        <!-- Hero Dashboard Preview -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="dashboard-card">
+            <div class="dashboard-header">
+              <div class="dashboard-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="dashboard-title">NovaSaaS Dashboard</span>
+              <span class="live-badge">● LIVE</span>
+            </div>
+            <div class="dashboard-body">
+              <div class="dash-sidebar">
+                <div class="dash-nav-item active">
+                  <span>⊞</span> Overview
+                </div>
+                <div class="dash-nav-item"><span>◈</span> Analytics</div>
+                <div class="dash-nav-item"><span>⬡</span> Automation</div>
+                <div class="dash-nav-item"><span>◉</span> Team</div>
+                <div class="dash-nav-item"><span>◇</span> Settings</div>
+              </div>
+              <div class="dash-main">
+                <div class="dash-metrics">
+                  <div class="metric-card">
+                    <span class="metric-label">Revenue</span>
+                    <span class="metric-value">$248,390</span>
+                    <span class="metric-change positive">↑ 18.4%</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Users</span>
+                    <span class="metric-value">12,847</span>
+                    <span class="metric-change positive">↑ 6.2%</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Tasks Done</span>
+                    <span class="metric-value">3,291</span>
+                    <span class="metric-change positive">↑ 24.1%</span>
+                  </div>
+                </div>
+                <div class="dash-chart">
+                  <div class="chart-bars">
+                    <div class="chart-bar" style="--h:55%"><span>Mon</span></div>
+                    <div class="chart-bar" style="--h:72%"><span>Tue</span></div>
+                    <div class="chart-bar" style="--h:60%"><span>Wed</span></div>
+                    <div class="chart-bar" style="--h:88%"><span>Thu</span></div>
+                    <div class="chart-bar" style="--h:75%"><span>Fri</span></div>
+                    <div class="chart-bar active" style="--h:95%"><span>Sat</span></div>
+                    <div class="chart-bar" style="--h:65%"><span>Sun</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+           TRUSTED BY LOGOS
+      ================================ -->
+    <section id="trusted" aria-labelledby="trusted-title">
+      <div class="section-container">
+        <p id="trusted-title" class="trusted-label">Trusted by industry leaders</p>
+        <div class="logos-track">
+          <div class="logos-strip">
+            <span class="logo-brand">Vercel</span>
+            <span class="logo-brand">Stripe</span>
+            <span class="logo-brand">Notion</span>
+            <span class="logo-brand">Linear</span>
+            <span class="logo-brand">Figma</span>
+            <span class="logo-brand">GitHub</span>
+            <span class="logo-brand">Shopify</span>
+            <span class="logo-brand">Atlassian</span>
+            <!-- Duplicated for infinite scroll effect via CSS -->
+            <span class="logo-brand">Vercel</span>
+            <span class="logo-brand">Stripe</span>
+            <span class="logo-brand">Notion</span>
+            <span class="logo-brand">Linear</span>
+            <span class="logo-brand">Figma</span>
+            <span class="logo-brand">GitHub</span>
+            <span class="logo-brand">Shopify</span>
+            <span class="logo-brand">Atlassian</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+           FEATURES SECTION
+      ================================ -->
+    <section id="features" aria-labelledby="features-title">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-tag">Features</span>
+          <h2 id="features-title" class="section-title">
+            Everything You Need to
+            <span class="gradient-text">Move Fast</span>
+          </h2>
+          <p class="section-subtitle">
+            A comprehensive toolkit built for modern teams who demand speed,
+            insight, and reliability at every scale.
+          </p>
+        </div>
+
+        <!-- Cards injected here by renderFeatures() in app.js -->
+        <div class="features-grid reveal" id="features-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================================
+           PRICING SECTION
+      ================================ -->
+    <section id="pricing" aria-labelledby="pricing-title">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Pricing</span>
+          <h2 id="pricing-title" class="section-title">
+            Simple, Transparent
+            <span class="gradient-text">Pricing</span>
+          </h2>
+          <p class="section-subtitle">
+            No hidden fees. No surprise bills. Cancel anytime. Start free
+            and upgrade when you're ready to scale.
+          </p>
+        </div>
+
+        <div class="pricing-toggle">
+          <span class="toggle-label toggle-label--active" id="billing-monthly">Monthly</span>
+          <div class="toggle-switch" role="switch" aria-label="Billing toggle">
+            <div class="toggle-thumb"></div>
+          </div>
+          <span class="toggle-label" id="billing-annual">
+            Annual
+            <span class="save-badge">Save 20%</span>
+          </span>
+        </div>
+
+        <!-- Cards injected here by renderPlans() in app.js -->
+        <div class="pricing-grid" id="pricing-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================================
+           TESTIMONIALS SECTION
+      ================================ -->
+    <section id="testimonials" aria-labelledby="testimonials-title">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-tag">Testimonials</span>
+          <h2 id="testimonials-title" class="section-title">
+            Loved by
+            <span class="gradient-text">50,000+ Teams</span>
+          </h2>
+          <p class="section-subtitle">
+            Don't just take our word for it — hear from the teams
+            who've transformed their workflows with NovaSaaS.
+          </p>
+        </div>
+
+        <!-- Cards injected here by renderTestimonials() in app.js -->
+        <div class="testimonials-grid reveal" id="testimonials-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================================
+           CTA BANNER
+      ================================ -->
+    <section id="cta-banner" aria-labelledby="cta-banner-title">
+      <div class="section-container">
+        <div class="cta-banner-card">
+          <div class="cta-banner-glow" aria-hidden="true"></div>
+          <span class="section-tag">Get Started Today</span>
+          <h2 id="cta-banner-title" class="cta-banner-title">
+            Ready to Scale
+            <span class="gradient-text">Without Limits?</span>
+          </h2>
+          <p class="cta-banner-subtitle">
+            Join 50,000+ teams already transforming their business with
+            NovaSaaS. No credit card required.
+          </p>
+          <div class="cta-banner-actions">
+            <a href="#pricing" class="btn btn-primary btn-lg" id="cta-banner-primary">
+              Start Free Trial — No CC Required
+            </a>
+            <a href="#testimonials" class="btn btn-ghost btn-lg" id="cta-banner-secondary">
+              Read Customer Stories
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================
+         FOOTER
+    ================================ -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-top">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo" aria-label="NovaSaaS Home">
+            <span class="logo-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <polygon points="16,2 30,28 2,28" fill="url(#logoGrad)" />
+                <polygon points="16,10 24,26 8,26" fill="#0a0a0f" opacity="0.6" />
+              </svg>
+            </span>
+            <span class="logo-text">Nova<span class="logo-accent">SaaS</span></span>
+          </a>
+          <p class="brand-tagline">
+            The AI-powered platform for modern teams. Scale without limits, ship without fear.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer Links -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Product</h4>
+            <ul role="list">
+              <li><a href="#features" class="footer-link">Features</a></li>
+              <li><a href="#pricing" class="footer-link">Pricing</a></li>
+              <li><a href="#" class="footer-link">Changelog</a></li>
+              <li><a href="#" class="footer-link">Roadmap</a></li>
+              <li><a href="#" class="footer-link">Status</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Company</h4>
+            <ul role="list">
+              <li><a href="#" class="footer-link">About</a></li>
+              <li><a href="#" class="footer-link">Blog</a></li>
+              <li><a href="#" class="footer-link">Careers</a></li>
+              <li><a href="#" class="footer-link">Press</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Developers</h4>
+            <ul role="list">
+              <li><a href="#" class="footer-link">API Docs</a></li>
+              <li><a href="#" class="footer-link">SDK</a></li>
+              <li><a href="#" class="footer-link">Integrations</a></li>
+              <li><a href="#" class="footer-link">Community</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Legal</h4>
+            <ul role="list">
+              <li><a href="#" class="footer-link">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link">Terms of Service</a></li>
+              <li><a href="#" class="footer-link">Cookie Policy</a></li>
+              <li><a href="#" class="footer-link">GDPR</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; 2026 NovaSaaS, Inc. All rights reserved.
+        </p>
+        <p class="footer-tagline">
+          Built for teams who scale.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top floating button -->
+  <button
+    class="scroll-top-btn"
+    id="scroll-top-btn"
+    aria-label="Scroll back to top"
+    title="Back to top"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script src="data.js"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
