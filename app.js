@@ -1,20 +1,17 @@
 /**
  * ============================================================
- *  NovaSaaS — app.js
- *  Prompt 2: DOM Manipulation & Events
- * ============================================================
- *
- *  Concepts practiced:
- *    • document.querySelector / querySelectorAll
- *    • element.addEventListener(event, handler)
- *    • element.classList.add / .remove / .toggle
- *    • window scroll event + scrollY
- *    • window.scrollTo({ behavior: 'smooth' })
- *    • ARIA attribute updates for accessibility
+ *  NovaSaaS — app.js (ES Module Version)
+ *  Prompt 8: Modules & Design Patterns
  * ============================================================
  */
 
 'use strict';
+
+// 1. MODULE IMPORTS
+import PubSub from './pubsub.js';
+import Typewriter from './typewriter.js';
+import { fetchPricingPlans, fetchTestimonials } from './api.js';
+import { FEATURES, PLANS, TESTIMONIALS } from './data.js';
 
 /* ============================================================
    PERFORMANCE UTILITIES (Prompt 7)
@@ -336,169 +333,24 @@ window.addEventListener('resize', function () {
 ============================================================ */
 
 /**
- * createTypewriter
- *
- * A CLOSURE FACTORY — it is a function that:
- *   1. Declares private state variables.
- *   2. Returns (or starts) inner functions that "close over"
- *      those private variables, keeping them alive between calls.
- *
- * DESTRUCTURING in the parameter list:   ← ES6 destructuring
- * Instead of accepting a plain `config` object and writing
- * `config.targetEl`, we unpack the keys directly in the signature
- * and supply defaults with `= value` where sensible.
- *
- * @param {object}   config
- * @param {Element}  config.targetEl    - element whose textContent we animate
- * @param {Element}  config.cursorEl    - the cursor bar element
- * @param {string[]} config.words       - array of phrases to cycle through
- * @param {number}   [config.typeSpeed=90]     - ms between typed characters
- * @param {number}   [config.deleteSpeed=48]   - ms between deleted characters
- * @param {number}   [config.holdMs=1800]      - ms to pause on a complete word
- * @returns {Function} cleanup — call this to stop all timers
+ * initTypewriter
+ * Uses the ES Module Typewriter (modularized in typewriter.js)
+ * which follows the Revealing Module Pattern.
  */
-const createTypewriter = ({          // ← arrow function           ← destructuring
-  targetEl,
-  cursorEl,
-  words,
-  typeSpeed   = 90,
-  deleteSpeed = 48,
-  holdMs      = 1800,
-}) => {
-
-  /* ----------------------------------------------------------
-     PRIVATE CLOSURE STATE
-     These `let` variables are declared inside createTypewriter.
-     They are invisible to the outside world, yet every inner
-     function below can read and mutate them — that is a closure.
-  ---------------------------------------------------------- */
-  let wordIndex  = 0;       // which word in `words` we're on
-  let charIndex  = 0;       // how many chars are currently visible
-  let isDeleting = false;   // typing forward or deleting backward?
-  let timerId    = null;    // holds the id returned by setInterval
-
-  /* ----------------------------------------------------------
-     HELPER — (re)start the typing interval at a given speed.
-     Calling setInterval while one already runs would create a
-     duplicate, so we always clearInterval first.
-  ---------------------------------------------------------- */
-  const startInterval = (speed) => {        // ← arrow function
-    clearInterval(timerId);                 // stop the previous one
-    timerId = setInterval(tick, speed);     // ← setInterval ★
-  };
-
-  /* ----------------------------------------------------------
-     TICK — the core typing state machine.
-     This arrow function CLOSES OVER wordIndex, charIndex,
-     isDeleting, and timerId — reading and mutating them each
-     time setInterval fires it.
-  ---------------------------------------------------------- */
-  const tick = () => {                              // ← arrow function
-
-    // `const` inside a function — block-scoped, re-evaluated
-    // on every call; does NOT hoist like `var`.
-    const currentWord = words[wordIndex];           // ← const
-
-    // Advance or retreat the visible character count
-    charIndex += isDeleting ? -1 : +1;
-
-    // Template literal ★ — backtick string with ${} interpolation.
-    // Equivalent to: currentWord.substring(0, charIndex)
-    targetEl.textContent = `${currentWord.slice(0, charIndex)}`; // ← template literal
-
-    /* ---- State transitions ---- */
-    if (!isDeleting && charIndex === currentWord.length) {
-      // Word fully typed → hold, then switch to delete mode
-      clearInterval(timerId);
-      timerId = setTimeout(() => {       // ← arrow fn in setTimeout
-        isDeleting = true;
-        startInterval(deleteSpeed);      // restart at delete speed
-      }, holdMs);
-
-    } else if (isDeleting && charIndex === 0) {
-      // Word fully deleted → jump to next word, switch to type mode
-      isDeleting = false;
-      // Modulo wraps the index back to 0 after the last word
-      wordIndex = (wordIndex + 1) % words.length;
-      startInterval(typeSpeed);          // restart at type speed
-    }
-  };
-
-  /* ----------------------------------------------------------
-     CURSOR BLINK — second independent setInterval.
-     A fixed 530 ms interval simply toggles the cursor's opacity.
-     The CSS `animation: cursorBlink` was the no-JS fallback;
-     once JS runs, this interval takes ownership of opacity.
-  ---------------------------------------------------------- */
-  let cursorVisible = true;                         // closure variable
-
-  const cursorInterval = setInterval(() => {        // ← setInterval ★  ← arrow fn
-    cursorVisible = !cursorVisible;
-    cursorEl.style.opacity = cursorVisible ? '1' : '0';
-    // Also disable the CSS animation now that JS is in control
-    cursorEl.style.animation = 'none';
-  }, 530);
-
-  /* ----------------------------------------------------------
-     KICK OFF the typewriter
-  ---------------------------------------------------------- */
-  startInterval(typeSpeed);
-
-  /* ----------------------------------------------------------
-     RETURN A CLEANUP FUNCTION
-     Whoever calls createTypewriter can call cleanup() later
-     (e.g. on a route change in a SPA) to stop all timers and
-     prevent memory leaks.  Good practice even if we don't need
-     it on a static page.
-  ---------------------------------------------------------- */
-  return () => {                                    // ← arrow fn
-    clearInterval(timerId);
-    clearInterval(cursorInterval);
-  };
+const initTypewriter = () => {
+  Typewriter.init('typewriter-target', [
+    'Workflows',
+    'Analytics',
+    'Operations',
+    'Future'
+  ]);
 };
 
+// Start typewriter
+initTypewriter();
 
-/* ============================================================
-   INVOKE createTypewriter
-   ============================================================
-   We grab both DOM elements, define our word list, and pass
-   them in as a config object. The factory returns a `cleanup`
-   function we could call later if needed.
-============================================================ */
 
-// querySelector — same pattern as Feature 1 & 2
-const typewriterTarget = document.querySelector('#typewriter-target');
-const typewriterCursor = document.querySelector('.typewriter-cursor');
-
-// Only run if both elements exist in the DOM
-if (typewriterTarget && typewriterCursor) {
-
-  // Word list — the phrases that will cycle in the hero headline.
-  // Each is a const-declared array literal.   ← const
-  const typewriterWords = [             // ← const
-    'Without Limits',
-    '10× Faster',
-    'With AI Power',
-    'At Any Scale',
-    'With Confidence',
-    'From Day One',
-  ];
-
-  // Start the typewriter — store cleanup in case we need it.
-  const stopTypewriter = createTypewriter({   // ← const, destructuring used inside
-    targetEl   : typewriterTarget,
-    cursorEl   : typewriterCursor,
-    words      : typewriterWords,
-    typeSpeed  : 90,
-    deleteSpeed: 48,
-    holdMs     : 1900,
-  });
-
-  // stopTypewriter() would halt both intervals if called.
-  // e.g.: document.addEventListener('visibilitychange', () => {
-  //         document.hidden ? stopTypewriter() : location.reload();
-  //       });
-}
+/* Typewriter successfully initialized via initTypewriter() above. */
 
 
 /* ============================================================
@@ -788,7 +640,6 @@ const initBillingToggle = () => {               // ← const + arrow fn
   };
 
   applyToggleState(currentBilling);
-
   toggleSwitch.addEventListener('click', () => {
     // Toggle billing mode
     currentBilling = currentBilling === 'monthly' ? 'annual' : 'monthly';
@@ -796,15 +647,47 @@ const initBillingToggle = () => {               // ← const + arrow fn
     // Prompt 6: Persist choice
     localStorage.setItem('billingPref', currentBilling);
 
+    // Prompt 8: Publish the change via PubSub
+    PubSub.publish('BILLING_CHANGE', { billing: currentBilling });
+
     // Visually activate the right state
     applyToggleState(currentBilling);
-
-    // Re-render pricing cards with updated billing
-    renderPlans(currentBilling);                // ← re-uses renderPlans
   });
 
-  return currentBilling; // return choice for init
+  // Prompt 8: Set initial state via PubSub too
+  setTimeout(() => {
+    PubSub.publish('BILLING_CHANGE', { billing: currentBilling });
+  }, 0);
+
+  return currentBilling;
 };
+
+
+/* ----------------------------------------------------------
+   PUBSUB SUBSCRIPTIONS (Prompt 8)
+   ----------------------------------------------------------
+   Components now listen for events instead of being tightly 
+   coupled to the toggle logic.
+---------------------------------------------------------- */
+
+// 1. Pricing Grid: re-renders when billing mode changes
+PubSub.subscribe('BILLING_CHANGE', (data) => {
+  renderPlans(data.billing);
+});
+
+// 2. Hero Stats: toggles the "Annual Savings" badge
+PubSub.subscribe('BILLING_CHANGE', (data) => {
+  const savingsStat = document.querySelector('#annual-savings-stat');
+  if (savingsStat) {
+    savingsStat.style.display = data.billing === 'annual' ? 'flex' : 'none';
+  }
+});
+
+// 3. Document Title: dynamic feedback
+PubSub.subscribe('BILLING_CHANGE', (data) => {
+  const mode = data.billing.charAt(0).toUpperCase() + data.billing.slice(1);
+  console.log(`[PubSub] Billing switched to: ${mode}`);
+});
 
 
 
@@ -948,9 +831,26 @@ const initGridDelegation = () => {
 };
 
 
+/* ----------------------------------------------------------
+   GLOBAL RETRY LISTENER (Prompt 5)
+   ----------------------------------------------------------
+   Handles "Try Again" clicks from and error states.
+---------------------------------------------------------- */
+const initRetryListener = () => {
+  document.addEventListener('click', (e) => {
+    const retryKey = e.target.dataset.retry;
+    if (retryKey && RETRY_REGISTRY[retryKey]) {
+      console.info(`[Retry] Attempting to reload: ${retryKey}`);
+      RETRY_REGISTRY[retryKey]();
+    }
+  });
+};
+
+
 // Initialization
 initHeroParallax();
 initGridDelegation();
+initRetryListener();
 
 
 /* ============================================================
@@ -1119,18 +1019,13 @@ const loadPricingAsync = async () => {           // ← async function ★
   // Step 1 — skeleton (instant, before any async work)
   grid.innerHTML = buildPricingSkeletons();
 
-  try {                                          // ← try ★
+  try {
+    const plans = await fetchPricingPlans();
 
-    // Step 2 — await the Promise (pauses here ~1.2 s)
-    const plans = await fetchPricingPlans();     // ← await ★
-
-    // Step 3a — data arrived; plans is the resolved array
-    // We still let renderPlans() read from the global PLANS
-    // (same data, but the round-trip through mockFetch proves
-    // the async pipeline works end-to-end).
-    const pref = initBillingToggle(); // Prompt 6: read stored pref
+    // Step 3a — data arrived; render initial state
+    // We fetch the current preference from the toggle module or localStorage
+    const pref = localStorage.getItem('billingPref') || 'monthly';
     renderPlans(pref);
-    // initBillingToggle is called above now
 
     console.info(`✓ Pricing loaded: ${plans.length} plans`);
 
@@ -1202,14 +1097,13 @@ RETRY_REGISTRY['testimonials'] = loadTestimonialsAsync;
 ---------------------------------------------------------- */
 const initRenderingAsync = async () => {         // ← async function ★
 
-  // Synchronous — no loading state needed
+  // Initialize interactive components that depend on DOM
+  initBillingToggle();
   renderFeatures();
 
-  // These two fire simultaneously but settle at different times
-  // (1.2 s and 1.8 s respectively) — no await here means they
-  // run concurrently.  Each manages its own skeleton + render.
-  loadPricingAsync();        // NOT awaited → runs concurrently
-  loadTestimonialsAsync();   // NOT awaited → runs concurrently
+  // Load dynamic data in parallel
+  loadPricingAsync();        
+  loadTestimonialsAsync();   
 };
 
 // Entry point
