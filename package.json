@@ -1,0 +1,12 @@
+{
+  "name": "js-recap-novasaas",
+  "version": "1.0.0",
+  "description": "Premium Vanilla JS Landing Page",
+  "scripts": {
+    "start": "serve .",
+    "dev": "npx serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

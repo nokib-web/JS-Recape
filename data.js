@@ -33,7 +33,7 @@
      wide        — true → gets the grid-column: span 2 class
      hidden      — true → filtered OUT by .filter() before render
 ============================================================ */
-const FEATURES = [
+export const FEATURES = [
   {
     id: 'feature-ai',
     iconColor: 'purple',
@@ -141,7 +141,7 @@ const FEATURES = [
      ctaHref       — button href
      hidden        — true → excluded by .filter() from render
 ============================================================ */
-const PLANS = [
+export const PLANS = [
   {
     id: 'plan-starter',
     icon: '⚡',
@@ -226,7 +226,7 @@ const PLANS = [
      featured    — true → card gets testimonial-card--featured class
                    (wide, highlighted) — used by .filter()
 ============================================================ */
-const TESTIMONIALS = [
+export const TESTIMONIALS = [
   {
     id: 'testimonial-1',
     stars: 5,
